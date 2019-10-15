@@ -10,7 +10,7 @@ class Article extends Model
     	'title', 'description', 'category_id', 'author_id'
     ];
 
-    public function author()
+    public function user()
     {
     	return $this->belongsTo(User::class);
     }

@@ -32,7 +32,7 @@ MAIN CONTENT
 									<td>{{ $article->id }}</td>
 									<td>{{ $article->title }}</td>
 									<td>{{ $article->category->title }}</td>
-									<td>{{ $article->author->first_name . ' ' . $article->author->last_name }}</td>
+									<td>{{ $article->user->first_name . ' ' . $article->user->last_name }}</td>
 									<td>{{ $article->created_at }}</td>
 									<td>
 										<button class="btn btn-primary btn-xs"><i class="fas fa-edit"></i></button>

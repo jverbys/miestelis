@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Article;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Category;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -15,7 +17,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::with('category', 'author')->get();
+        $articles = Article::with('category', 'user')->get();
 
         return view('admin.articles.index', compact('articles'));
     }
@@ -27,7 +29,9 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all()->where('type' , '=' , 'article');
+
+        return view('admin.articles.create',compact('categories'));
     }
 
     /**
@@ -38,7 +42,15 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = $request->validate([
+            'title' => 'required|min:3|max:255',
+            'description' => 'required|min:3',
+            'category_id' => 'required'
+        ]);
+
+        Auth::user()->article()->create($attributes);
+
+        return redirect('/admin/articles');
     }
 
     /**

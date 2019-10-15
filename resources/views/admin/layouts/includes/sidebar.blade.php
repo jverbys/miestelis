@@ -18,15 +18,23 @@ MAIN SIDEBAR MENU
             </li>
 
             <li class="sub-menu">
-                <a class="active" href="javascript:;" >
+                <a class="{{ Request::is('admin/articles*') ? 'active' : '' }}" href="javascript:;" >
                     <i class="fas fa-newspaper"></i>
                     <span>Naujienos</span>
                 </a>
                 <ul class="sub">
-                    <li class="active"><a  href="general.html"><i class="fas fa-list"></i>Straipsnių sąrašas</a></li>
-                    <li><a  href="buttons.html"><i class="fas fa-plus"></i>Naujas straipsnis</a></li>
-                    <li><a  href="panels.html"><i class="fas fa-list"></i>Kategorijos</a></li>
-                    <li><a  href="panels.html"><i class="fas fa-plus"></i>Nauja kategorija</a></li>
+                    <li class="{{ Request::is('admin/articles') ? 'active' : '' }}">
+                        <a href="/admin/articles"><i class="fas fa-list"></i>Straipsniai</a>
+                    </li>
+                    <li class="{{ Request::is('admin/articles/create') ? 'active' : '' }}">
+                        <a href="/admin/articles/create"><i class="fas fa-plus"></i>Naujas straipsnis</a>
+                    </li>
+                    <li class="{{ Request::is('admin/articles/categories') ? 'active' : '' }}">
+                        <a href="panels.html"><i class="fas fa-list"></i>Kategorijos</a>
+                    </li>
+                    <li class="{{ Request::is('admin/articles/categories/create') ? 'active' : '' }}">
+                        <a href="panels.html"><i class="fas fa-plus"></i>Nauja kategorija</a>
+                    </li>
                 </ul>
             </li>
 

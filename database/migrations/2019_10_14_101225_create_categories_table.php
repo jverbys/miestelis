@@ -18,7 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('type');
-            $table->unsignedInteger('author_id');
+            $table->unsignedInteger('user_id');
             $table->timestamps();
         });
     }

@@ -10,7 +10,7 @@ class Category extends Model
     	'title', 'description', 'type', 'author_id'
     ];
 
-    public function author()
+    public function user()
     {
     	return $this->belongsTo(User::class);
     }
