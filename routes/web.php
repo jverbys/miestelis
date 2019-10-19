@@ -19,6 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['middleware' => ['admin']], function () {
-	Route::resource('admin/articles', 'Admin\ArticleController');
+Route::namespace('Admin')->group(function () {
+	Route::middleware('admin')->group(function () {
+		Route::prefix('admin')->group(function () {
+			Route::name('admin.')->group(function () {
+				Route::resource('articles', 'ArticleController');
+			});
+		});
+	});
 });

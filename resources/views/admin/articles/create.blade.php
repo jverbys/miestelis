@@ -15,7 +15,7 @@ MAIN CONTENT
 				<div class="form-panel">
 					<h4 class="mb"><i class="fa fa-angle-right"></i> Naujas straipsnis</h4>
 
-					<form class="form-horizontal style-form" method="POST" action="/admin/articles">
+					<form class="form-horizontal style-form" method="POST" action="{{ route('admin.articles.store') }}">
 						@csrf
 
 						<div class="form-group">
@@ -28,7 +28,7 @@ MAIN CONTENT
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">Aprašymas</label>
 							<div class="col-sm-10">
-								<textarea name="description" class="form-control" required></textarea>
+								<textarea name="description" class="form-control txt-minh200-resizev" required></textarea>
 							</div>
 						</div>
 
@@ -36,6 +36,7 @@ MAIN CONTENT
 							<label class="col-sm-2 col-sm-2 control-label">Kategorija</label>
 							<div class="col-sm-10">
 								<select name="category_id" class="form-control" required>
+									<option value="" disabled selected hidden>Pasirinkite...</option>
 									@foreach ($categories as $category)
 									<option value="{{ $category->id }}">{{ $category->title }}</option>
 									@endforeach
@@ -43,7 +44,7 @@ MAIN CONTENT
 							</div>
 						</div>
 
-						<button type="submit" class="btn btn-theme btn-block">Sukurti naują</button>
+						<button type="submit" class="btn btn-theme btn-block"><i class="fas fa-save"></i> Sukurti naują</button>
 					</form>
 				</div>
 			</div><!-- col-lg-12-->      	

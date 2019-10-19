@@ -14,7 +14,7 @@ MAIN CONTENT
 			<div class="col-md-12">
 				<div class="content-panel">
 					<table class="table table-striped table-advance table-hover">
-						<h4><i class="fa fa-angle-right"></i> Straipsnių sąrašas</h4>
+						<h4><i class="fa fa-angle-right"></i> Straipsnių sąrašas <span class="fsize-15">(spustelkite ant pavadinimo, norint peržiūrėti)</span></h4>
 						<hr>
 						<thead>
 							<tr>
@@ -30,7 +30,9 @@ MAIN CONTENT
 							@foreach ($articles as $article)
 								<tr>
 									<td>{{ $article->id }}</td>
-									<td>{{ $article->title }}</td>
+									<td class="clickable" onclick="window.location='{{ route('admin.articles.show', $article->id) }}'">
+										{{ $article->title }}
+									</td>
 									<td>{{ $article->category->title }}</td>
 									<td>{{ $article->user->first_name . ' ' . $article->user->last_name }}</td>
 									<td>{{ $article->created_at }}</td>

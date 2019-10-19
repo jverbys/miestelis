@@ -17,7 +17,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::with('category', 'user')->get();
+        $articles = Article::all();
 
         return view('admin.articles.index', compact('articles'));
     }
@@ -48,9 +48,9 @@ class ArticleController extends Controller
             'category_id' => 'required'
         ]);
 
-        Auth::user()->article()->create($attributes);
+        $article = Auth::user()->article()->create($attributes);
 
-        return redirect('/admin/articles');
+        return redirect('/admin/articles/' . $article->id);
     }
 
     /**
@@ -61,7 +61,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return view('admin.articles.show', compact('article'));
     }
 
     /**
