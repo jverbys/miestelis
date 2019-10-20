@@ -31,7 +31,7 @@ class ArticleController extends Controller
     {
         $categories = Category::all()->where('type' , '=' , 'article');
 
-        return view('admin.articles.create',compact('categories'));
+        return view('admin.articles.create', compact('categories'));
     }
 
     /**
@@ -50,7 +50,7 @@ class ArticleController extends Controller
 
         $article = Auth::user()->article()->create($attributes);
 
-        return redirect('/admin/articles/' . $article->id);
+        return redirect(route('admin.articles.show', $article->id));
     }
 
     /**
@@ -72,7 +72,9 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        $categories = Category::all()->where('type' , '=' , 'article')->except($article->category->id);
+
+        return view('admin.articles.edit', compact('article', 'categories'));
     }
 
     /**
@@ -84,7 +86,13 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $article->update($request->validate([
+            'title' => 'required|min:3|max:255',
+            'description' => 'required|min:3',
+            'category_id' => 'required'
+        ]));
+
+        return view('admin.articles.show', compact('article'));
     }
 
     /**
@@ -95,6 +103,8 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+
+        return redirect(route('admin.articles.index'));
     }
 }

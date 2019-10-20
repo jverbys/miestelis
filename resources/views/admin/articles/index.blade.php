@@ -37,8 +37,17 @@ MAIN CONTENT
 									<td>{{ $article->user->first_name . ' ' . $article->user->last_name }}</td>
 									<td>{{ $article->created_at }}</td>
 									<td>
-										<button class="btn btn-primary btn-xs"><i class="fas fa-edit"></i></button>
-										<button class="btn btn-danger btn-xs"><i class="fas fa-trash"></i></button>
+										<a href="{{ route ('admin.articles.edit', $article->id) }}" class="btn btn-theme btn-xs">
+											<i class="fas fa-edit"></i>
+										</a>
+										
+										<form method="POST" action="{{ route('admin.articles.destroy', $article->id) }}">
+											@csrf
+											@method('DELETE')
+											<button onclick="return confirm('Ar tikrai norite ištrinti šį straipsnį?')" class="btn btn-theme04 btn-xs">
+												<i class="fas fa-trash"></i>
+											</button>
+										</form>
 									</td>
 								</tr>
 							@endforeach
@@ -47,7 +56,6 @@ MAIN CONTENT
 				</div><!-- /content-panel -->
 			</div><!-- /col-md-12 -->
 		</div><!-- /row -->
-
 	</section><!-- /wrapper -->
 </section><!-- /MAIN CONTENT -->
 
