@@ -30,10 +30,10 @@ MAIN SIDEBAR MENU
                         <a href="/admin/articles/create"><i class="fas fa-plus"></i>Naujas straipsnis</a>
                     </li>
                     <li class="{{ Request::is('admin/articles/categories') ? 'active' : '' }}">
-                        <a href="panels.html"><i class="fas fa-list"></i>Kategorijos</a>
+                        <a href="/admin/articles/categories"><i class="fas fa-list"></i>Kategorijos</a>
                     </li>
                     <li class="{{ Request::is('admin/articles/categories/create') ? 'active' : '' }}">
-                        <a href="panels.html"><i class="fas fa-plus"></i>Nauja kategorija</a>
+                        <a href="/admin/articles/categories/create"><i class="fas fa-plus"></i>Nauja kategorija</a>
                     </li>
                 </ul>
             </li>

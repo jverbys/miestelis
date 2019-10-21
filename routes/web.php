@@ -25,5 +25,11 @@ Route::group([
 	'prefix' => 'admin',
 	'as' => 'admin.',
 	], function () {
+		Route::group([
+			'prefix' => 'articles',
+			'as' => 'articles.'
+		], function () {
+			Route::resource('categories', 'ArticleCategoryController')->except('show');
+		});
 		Route::resource('articles', 'ArticleController');
 });
