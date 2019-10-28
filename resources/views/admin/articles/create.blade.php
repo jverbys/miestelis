@@ -15,7 +15,7 @@ MAIN CONTENT
 				<div class="form-panel">
 					<h4 class="mb"><i class="fa fa-angle-right"></i> Naujas straipsnis</h4>
 
-					<form class="form-horizontal style-form" method="POST" action="{{ route('admin.articles.store') }}">
+					<form class="form-horizontal style-form" method="POST" action="{{ route('admin.articles.store') }}" enctype="multipart/form-data">
 						@csrf
 
 						<div class="form-group">
@@ -41,6 +41,13 @@ MAIN CONTENT
 									<option value="{{ $category->id }}">{{ $category->title }}</option>
 									@endforeach
 								</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 col-sm-2 control-label">Nuotraukos</label>
+							<div class="col-sm-10">
+								<input type="file" multiple="" accept=".png,.jpg,.jpeg" name="images[]">
 							</div>
 						</div>
 

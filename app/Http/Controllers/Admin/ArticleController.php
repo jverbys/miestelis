@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
 use Illuminate\Support\Facades\Auth;
+use App\ArticleImage;
+use Storage;
 
 class ArticleController extends Controller
 {
@@ -33,6 +35,35 @@ class ArticleController extends Controller
         ]);
 
         $article = Auth::user()->article()->create($attributes);
+
+        //image upload
+        $request->validate([
+            'images' => 'required',
+            'images.*' => 'image|mimes:jpg,jpeg,png|max:1999'
+        ]);
+        $images = $request->images;
+        $i = 0;
+        foreach ($images as $image)
+        {
+            $filenameWithExt = $image->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $ext = $image->getClientOriginalExtension();
+            $filenameToStore = $article->id . '_' . $i . '_' . date('Ymd_His') . '_' . $filenameWithExt;
+
+            $is_main = false;
+            if ($image == $images[0]) $is_main = true;
+
+            if (Storage::putFileAs('articles', $image, $filenameToStore))
+            {
+                ArticleImage::create([
+                    'title' => $filenameToStore,
+                    'article_id' => $article->id,
+                    'is_main' => $is_main
+                ]);
+            }
+
+            $i++;
+        }
 
         return redirect(route('admin.articles.show', $article->id));
     }
