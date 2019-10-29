@@ -53,7 +53,7 @@ class ArticleController extends Controller
             $is_main = false;
             if ($image == $images[0]) $is_main = true;
 
-            if (Storage::putFileAs('articles', $image, $filenameToStore))
+            if (Storage::putFileAs('public/articles', $image, $filenameToStore))
             {
                 ArticleImage::create([
                     'title' => $filenameToStore,
@@ -70,7 +70,9 @@ class ArticleController extends Controller
 
     public function show(Article $article)
     {
-        return view('admin.articles.show', compact('article'));
+        $images = ArticleImage::all()->where('article_id', '=', $article->id);
+
+        return view('admin.articles.show', compact('article', 'images'));
     }
 
     

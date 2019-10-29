@@ -30,6 +30,7 @@ Route::group([
 			'as' => 'articles.'
 		], function () {
 			Route::resource('categories', 'ArticleCategoryController')->except('show');
+			Route::patch('{article}/image/{image}', 'ArticleMainImageController@update')->name('image.update');
 		});
 		Route::resource('articles', 'ArticleController');
 });

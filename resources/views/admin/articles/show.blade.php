@@ -76,6 +76,32 @@ MAIN CONTENT
 								<p>{{ $article->updated_at }}</p>
 							</div>
 						</div>
+
+						<div class="row ms-0">
+							<div class="col-md-12">
+								<h5 class="mt">Nuotraukos</h5>
+								<div class="img-grid">
+									@foreach ($images as $image)
+										<div class="img-grid-item">
+											@if ($image->is_main)
+												<span>Pagrindinė</span>
+											@endif
+											<a href="/storage/articles/{{ $image->title }}" target="_blank"><img src="/storage/articles/{{ $image->title }}"></a>
+											@if (!$image->is_main)
+												<form method="POST" action="{{ route('admin.articles.image.update', ['article' => $article->id, 'image' => $image->id]) }}">
+													@csrf
+													@method('PATCH')
+													<div class="buttonHolder">
+														<button class="btn btn-theme">Padaryti pagrindine</button>
+													</div>
+												</form>
+											@endif
+										</div>
+									@endforeach
+								</div>
+
+							</div>
+						</div>
 					</div>
 				</div>
 			</div><!-- col-lg-12-->      	
